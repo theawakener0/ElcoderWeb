@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <div class="auth-content">
+        <div class="auth-card">
+            <header class="auth-header">
+                <h3 class="auth-title">Register</h3>
+            </header>
+            
+            <main class="auth-body">
+                <form method="POST" class="auth-form">
+                    <div class="form-field">
+                        <div class="input-group">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-input" id="username" name="username" placeholder="Enter username" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="input-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-input" id="email" name="email" placeholder="Enter email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="input-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-input" id="password" name="password" placeholder="Enter password" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="input-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="phone" name="phone" placeholder="Enter phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="input-group">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-input" id="address" name="address" placeholder="Enter your address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox" id="is_admin" name="is_admin">
+                            <label class="checkbox-label" for="is_admin">Register as Admin</label>
+                        </div>
+                    </div>
+
+                    <div class="form-field admin-code-field" style="display: none;">
+                        <div class="input-group">
+                            <label for="admin_code" class="form-label">Admin Code</label>
+                            <input type="password" class="form-input" id="admin_code" name="admin_code" placeholder="Enter admin code">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    </div>
+                </form>
+
+                <footer class="auth-footer">
+                    <p class="text-center">
+                        Already have an account? 
+                        <a href="{{ url_for('login') }}" class="link-primary">Login here</a>
+                    </p>
+                </footer>
+            </main>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Manage Workshops{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Manage Workshops</h1>
+            <div class="mb-4">
+                <a href="{{ url_for('create_workshop') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New Workshop
+                </a>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Participants</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for workshop in workshops.items %}
+                        <tr>
+                            <td>{{ workshop.title }}</td>
+                            <td>{{ workshop.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ workshop.location }}</td>
+                            <td>{{ workshop.current_participants }}/{{ workshop.max_participants }}</td>
+                            <td>
+                                {% if workshop.registration_open %}
+                                    <span class="badge bg-success">Open</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Closed</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-primary" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <button class="btn btn-sm btn-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            {% if workshops.pages > 1 %}
+            <nav aria-label="Workshop navigation">
+                <ul class="pagination justify-content-center">
+                    {% for page_num in workshops.iter_pages(left_edge=2, left_current=2, right_current=3, right_edge=2) %}
+                        {% if page_num %}
+                            {% if page_num == workshops.page %}
+                                <li class="page-item active">
+                                    <span class="page-link">{{ page_num }}</span>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('manage_workshops', page=page_num) }}">{{ page_num }}</a>
+                                </li>
+                            {% endif %}
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link">...</span>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

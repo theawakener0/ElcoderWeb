@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="library-container">
+    <h1 class="library-title fade-in">Digital Library</h1>
+    
+    {% if current_user.is_admin %}
+    <div class="admin-controls fade-in">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">
+            <i class="fas fa-plus"></i> Add New Book
+        </button>
+    </div>
+    {% endif %}
+
+    <div class="book-grid">
+        {% for book in books %}
+        <div class="book-card fade-in" data-book-id="{{ book.id }}">
+            <div class="book-cover">
+                <img src="{{ book.cover_image }}" alt="{{ book.title }}" loading="lazy">
+                <div class="book-overlay">
+                    <button class="btn btn-primary preview-btn" data-pdf-url="{{ book.pdf_url }}">
+                        <i class="fas fa-book-reader"></i> Preview
+                    </button>
+                </div>
+            </div>
+            <div class="book-info">
+                <h3>{{ book.title }}</h3>
+                <p class="author">{{ book.author }}</p>
+                <p class="description">{{ book.description[:100] }}...</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- PDF Preview Modal -->
+<div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Book Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="pdfViewer" class="pdf-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Book Modal (Admin Only) -->
+{% if current_user.is_admin %}
+<div class="modal fade" id="addBookModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Book</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addBookForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" class="form-control" id="author" name="author" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="coverImage" class="form-label">Cover Image</label>
+                        <input type="file" class="form-control" id="coverImage" name="cover_image" accept="image/*" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pdfFile" class="form-label">PDF File</label>
+                        <input type="file" class="form-control" id="pdfFile" name="pdf_file" accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

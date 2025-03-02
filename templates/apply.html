@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Apply to Join Our Team{% endblock %}
+{% block content %}
+<div class="application-container">
+    <div class="application-wrapper">
+        <div class="application-card">
+            <div class="application-card__header">
+                <h3 class="application-title">Application Form</h3>
+            </div>
+            <div class="application-card__body">
+                <form method="POST" enctype="multipart/form-data" class="application-form">
+                    <div class="application-section">
+                        <h4 class="section-title">Personal Information</h4>
+                        <div class="form-row">
+                            <div class="form-group form-group--half">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-input" id="firstName" name="first_name" required>
+                            </div>
+                            <div class="form-group form-group--half">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-input" id="lastName" name="last_name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-input" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="application-section">
+                        <h4 class="section-title">Professional Experience</h4>
+                        <div class="form-group">
+                            <label for="position" class="form-label">Position You're Applying For</label>
+                            <select class="form-select" id="position" name="position" required>
+                                <option value="">Select a position</option>
+                                <option value="developer">Developer</option>
+                                <option value="designer">Designer</option>
+                                <option value="content_writer">Content Writer</option>
+                                <option value="educator">Technical Educator</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience" class="form-label">Years of Experience</label>
+                            <input type="number" class="form-input" id="experience" name="experience" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="skills" class="form-label">Key Skills</label>
+                            <textarea class="form-textarea" id="skills" name="skills" rows="3" placeholder="List your relevant skills, separated by commas" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="application-section">
+                        <h4 class="section-title">Additional Information</h4>
+                        <div class="form-group">
+                            <label for="resume" class="form-label">Resume/CV</label>
+                            <input type="file" class="form-file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="portfolio" class="form-label">Portfolio URL (Optional)</label>
+                            <input type="url" class="form-input" id="portfolio" name="portfolio">
+                        </div>
+                        <div class="form-group">
+                            <label for="motivation" class="form-label">Why do you want to join our team?</label>
+                            <textarea class="form-textarea" id="motivation" name="motivation" rows="4" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="submit-button">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
